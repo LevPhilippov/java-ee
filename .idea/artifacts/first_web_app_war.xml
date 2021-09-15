@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="first-web-app:war">
+    <output-path>$PROJECT_DIR$/first-web-app/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>false</exploded>
+        <module>first-web-app</module>
+        <packaging>war</packaging>
+        <unpackNestedArchives>false</unpackNestedArchives>
+      </options>
+    </properties>
+    <root id="archive" name="first-web-app.war">
+      <element id="artifact" artifact-name="first-web-app:war exploded" />
+    </root>
+  </artifact>
+</component>
