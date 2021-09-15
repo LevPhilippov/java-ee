@@ -1,4 +1,4 @@
-package lev.filippov;
+package lev.filippov.servlets;
 
 import javax.servlet.*;
 import java.io.IOException;

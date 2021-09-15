@@ -1,1 +1,7 @@
-lev\filippov\FirstServlet.class
+lev\filippov\models\Product.class
+lev\filippov\filters\SimpleFilter.class
+lev\filippov\persistance\PersistanceBean.class
+lev\filippov\servlets\ProductInfoServlet.class
+lev\filippov\servlets\FirstServlet.class
+lev\filippov\listeners\PersistentInjectionListener.class
+lev\filippov\servlets\FirstHttpServlet.class

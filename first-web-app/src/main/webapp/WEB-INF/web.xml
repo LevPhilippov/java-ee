@@ -8,7 +8,7 @@
 
     <servlet>
         <servlet-name>FirstServlet</servlet-name>
-        <servlet-class>lev.filippov.FirstServlet</servlet-class>
+        <servlet-class>lev.filippov.servlets.FirstServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
