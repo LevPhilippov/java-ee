@@ -1,5 +1,6 @@
 package lev.filippov.servlets;
 
+import lev.filippov.exceptions.PageNotFoundException;
 import lev.filippov.models.Product;
 import lev.filippov.persistance.PersistanceBean;
 
@@ -42,7 +43,6 @@ public class ProductInfoServlet extends HttpServlet {
                 resp.getWriter().print("<tr>");
                 resp.getWriter().printf("<td>%d</td>\n", p.getId());
                 resp.getWriter().printf("<td><a href=\"%s/products/%d\">%s</a></td>\n", req.getContextPath(), p.getId(), p.getName());
-                //                    resp.getWriter().printf("<td><a href=\"%s:%d/%s/product?id=%d\">%s</a></td>\n", req.getServerName(), req.getServerPort(),req.getContextPath() , p.getId(), p.getName());
                 resp.getWriter().printf("<td>%s</td>\n", p.getPrice().toString());
                 resp.getWriter().print("</tr>");
             }
@@ -53,15 +53,11 @@ public class ProductInfoServlet extends HttpServlet {
             if (matcher.matches()) {
                 try {
                     Long id = Long.parseLong(matcher.group(1));
-                    Optional<Product> o = persistanceBean.getProductById(id);
-                    if (o.isPresent()) {
-                        resp.getWriter().printf("<p>id: %d\n", o.get().getId());
-                        resp.getWriter().printf("<p>Name: %s\n", o.get().getName());
-                        resp.getWriter().printf("<p>Price: %s\n", o.get().getPrice().toString());
-                    } else {
-                        resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                    Product o = persistanceBean.getProductById(id).orElseThrow(PageNotFoundException::new);
+                        resp.getWriter().printf("<p>id: %d\n", o.getId());
+                        resp.getWriter().printf("<p>Name: %s\n", o.getName());
+                        resp.getWriter().printf("<p>Price: %s\n", o.getPrice().toString());
                         return;
-                    }
                 } catch (NumberFormatException e) {
                     resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 }
