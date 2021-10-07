@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@WebServlet(urlPatterns = {"/products/*"})
+//@WebServlet(urlPatterns = {"/products/*"})
 public class ProductInfoServlet extends HttpServlet {
 
     private PersistanceBean persistanceBean;

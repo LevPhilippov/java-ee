@@ -2,6 +2,7 @@ lev\filippov\models\Product.class
 lev\filippov\exceptions\PageNotFoundException.class
 lev\filippov\filters\SimpleFilter.class
 lev\filippov\persistance\PersistanceBean.class
+lev\filippov\servlets\ProductController.class
 lev\filippov\servlets\ProductInfoServlet.class
 lev\filippov\FirstServlet.class
 lev\filippov\servlets\PageNotFoundServlet.class
