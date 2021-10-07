@@ -15,4 +15,9 @@
         <servlet-name>FirstServlet</servlet-name>
         <url-pattern>/first_servlet</url-pattern>
     </servlet-mapping>
+
+    <error-page>
+        <exception-type>lev.filippov.exceptions.PageNotFoundException</exception-type>
+        <location>/not_found</location>
+    </error-page>
 </web-app>
