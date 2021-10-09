@@ -1,0 +1,36 @@
+<html         xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://xmlns.jcp.org/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+lang="en">
+
+<h:head>
+    <!--  Required meta tags  -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!--  Bootstrap CSS  -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
+    <title>Product list application</title>
+</h:head>
+
+<h:body>
+
+    <div class="container">
+        <div class="row py-2">
+            <div class="col-12">
+                <h:form>
+                    <div class="form-group">
+                        <h:outputLabel value="Name"/>
+                        <h:inputText styleClass="form-control" id="name" value="#{categoryController.cat.name}" placeholder="Enter name"/>
+                    </div>
+                    <h:commandButton value="Submit" styleClass="btn btn-primary" action="#{categoryController.saveCat()}"/>
+                </h:form>
+            </div>
+        </div>
+    </div>
+
+    <ui:include src="WEB-INF/fragments/script.xhtml"></ui:include>
+
+</h:body>
+</html>
