@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="lev.filippov.persistance.PersistanceBean" %>
+<%@ page import="lev.filippov.persistance.ProductRepositoryImpl" %>
 <%@ page import="lev.filippov.models.Product" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>

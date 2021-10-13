@@ -1,31 +1,34 @@
 package lev.filippov.controllers;
 
 import lev.filippov.models.Category;
-import lev.filippov.persistance.CategoryRepository;
+import lev.filippov.persistance.CategoryRepositoryImpl;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
 @Named
-@SessionScoped
+@ApplicationScoped
 public class CategoryController implements Serializable {
 
     @Inject
-    CategoryRepository cr;
+    @Named("categoryRepository")
+    CategoryRepositoryImpl cr;
 
+    @Getter
+    @Setter
+    List<Category> categoryList;
+
+    public void preloadData () {
+        this.categoryList = cr.getAll();
+    }
+    @Getter
+    @Setter
     Category cat;
-
-    public Category getCat() {
-        return cat;
-    }
-
-    public void setCat(Category cat) {
-        this.cat = cat;
-    }
-
 
     public List<Category> findAll() {
         return cr.getAll();

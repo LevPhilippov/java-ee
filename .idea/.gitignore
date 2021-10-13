@@ -7,3 +7,5 @@
 /dataSources/
 /dataSources.local.xml
 ../first-web-app/target/
+../first-jsf-app/*.jar
+

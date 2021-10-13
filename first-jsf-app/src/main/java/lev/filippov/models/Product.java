@@ -1,42 +1,33 @@
 package lev.filippov.models;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Product {
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Product implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
     private String name;
+
+    @Column
     private BigDecimal price;
 
-    public Product(Long id, String name, BigDecimal price) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-    }
+    @ManyToOne
+    @JoinColumn(name = "categoryId", referencedColumnName = "id")
+    private Category category;
 
-    public Product() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
+    @ManyToOne
+    @JoinColumn(name = "brandId", referencedColumnName = "id")
+    private Brand brand;
 }

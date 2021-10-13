@@ -10,9 +10,9 @@ import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Category implements Serializable {
+@AllArgsConstructor
+public class Brand implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +21,6 @@ public class Category implements Serializable {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "category")
-    private List<Product> products;
-
-
-
-
+    @OneToMany(mappedBy = "brand")
+    private List<Product> productList;
 }

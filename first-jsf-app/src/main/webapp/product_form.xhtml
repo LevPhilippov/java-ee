@@ -28,6 +28,16 @@ lang="en">
                         <h:outputLabel value="Price"/>
                         <h:inputText styleClass="form-control" p:type="number" id="price" value="#{productController.product.price}" placeholder="Enter price"/>
                     </div>
+                    <div class="form-group">
+                        <h:selectOneListbox size="1" styleClass="form-control" label="Категория" value="#{productController.product.categoryId}">
+                            <f:selectItems value="#{categoryController.findAll()}" var="cat" itemLabel="#{cat.name}" itemValue="#{cat.id}" itemLabelEscaped="true"/>
+                        </h:selectOneListbox>
+                    </div>
+                    <div class="form-group">
+                        <h:selectOneListbox size="1" value="#{productController.product.brandId}" label="Брэнд" styleClass="form-control">
+                            <f:selectItems value="#{productController.brandList}" var="brand" itemLabel="#{brand.name}" itemValue="#{brand.id}" itemLabelEscaped="true"/>
+                        </h:selectOneListbox>
+                    </div>
                     <h:commandButton value="Submit" styleClass="btn btn-primary" action="#{productController.saveProduct()}"/>
                 </h:form>
             </div>
