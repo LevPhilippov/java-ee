@@ -1,0 +1,11 @@
+# 1. creating datasource section in standalone.xml config
+data-source add \
+    --jndi-name=java:jboss/datasources/Geekbrains \
+    --name=Geekbrains \
+    --connection-url=jdbc:postgresql://localhost:5432/geekbrains \
+    --driver-name=postgres \
+    --user-name=postgres \
+    --password=postgres
+
+# 2. restarting Wildfly server
+:reload
