@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@NamedEntityGraph(name = "products-with-categories-and-brands",attributeNodes = {@NamedAttributeNode("category"), @NamedAttributeNode("brand")})
 public class Product implements Serializable {
 
     @Id

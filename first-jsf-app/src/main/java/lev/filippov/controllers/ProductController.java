@@ -4,15 +4,15 @@ import lev.filippov.models.Brand;
 import lev.filippov.models.Product;
 import lev.filippov.models.dto.ProductDto;
 import lev.filippov.service.BrandService;
-import lev.filippov.service.ProductService;
+import lev.filippov.service.LocalProductService;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.inject.Qualifier;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.List;
@@ -24,8 +24,9 @@ public class ProductController implements Serializable {
     @Inject
     BrandService brandService;
 
-    @Inject
-    ProductService productService;
+//    @Inject
+    @EJB
+    LocalProductService productService;
 
     @Setter
     @Getter
@@ -72,7 +73,7 @@ public class ProductController implements Serializable {
 
     public void deleteProduct(Product product) {
         productService.delete(product);
-//        return "products.xhtml?faces-redirect=true";
+//        return "products.xhtml?faces-redirect=true"; Updateted by Ajax
     }
 
     public String newProduct() {

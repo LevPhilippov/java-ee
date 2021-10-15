@@ -5,7 +5,7 @@
 >
 
 <h:head>
-    <ui:include src="WEB-INF/fragments/head.xhtml"></ui:include>
+    <ui:include src="WEB-INF/fragments/head.xhtml"/>
 </h:head>
 
 <h:body>
@@ -13,7 +13,7 @@
     <f:event listener="#{productController.preloadData}" type="preRenderView"/>
 
     <ui:include src="WEB-INF/fragments/navigation.xhtml">
-        <ui:param name="pageName" value="Product List"></ui:param>
+        <ui:param name="pageName" value="Product List"/>
     </ui:include>
 
 <div class="container">
@@ -60,16 +60,17 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Actions</f:facet>
-                        <h:commandButton value="Edit" action="#{productController.editProduct(product)}" styleClass="btn btn-success mr-2"/>
+                        <h:commandButton id="editButton" value="Edit" action="#{productController.editProduct(product)}" styleClass="btn btn-success mr-2"/>
                         <h:commandButton id="delButton" value="Delete" action="#{productController.deleteProduct(product)}" styleClass="btn btn-danger">
                             <f:ajax event="click" render="prodform"/>
                         </h:commandButton>
+                        <h:commandButton id="addToCartButton" value="Add to cart" action="#{cartController.addToCart(product)}" styleClass="btn btn-primary"/>
                     </h:column>
                 </h:dataTable>
             </h:form>
         </div>
     </div>
 </div>
-    <ui:include src="WEB-INF/fragments/script.xhtml"></ui:include>
+    <ui:include src="WEB-INF/fragments/script.xhtml"/>
 </h:body>
 </html>

@@ -13,7 +13,6 @@ import java.util.*;
 
 @Named("categoryRepository")
 @ApplicationScoped
-@Transactional
 public class CategoryRepositoryImpl implements JPARepository<Category> {
 
     @PersistenceContext(unitName = "ds")
@@ -56,6 +55,7 @@ public class CategoryRepositoryImpl implements JPARepository<Category> {
         return em.createQuery("SELECT c FROM Category c",Category.class).getResultList();
     }
 
+    @Transactional
     public void save(Category cat) {
         em.persist(em.merge(cat));
     }
@@ -64,9 +64,9 @@ public class CategoryRepositoryImpl implements JPARepository<Category> {
         return Optional.ofNullable(em.find(Category.class, id));
     }
 
-
+    @Transactional
     public void delete(Category cat) {
-        em.createQuery("DELETE from Category c where p.id = :id").setParameter("id", cat.getId()).executeUpdate();
+        em.createQuery("delete from Category c where c.id=:id").setParameter("id", cat.getId()).executeUpdate();
     }
 
     @Override

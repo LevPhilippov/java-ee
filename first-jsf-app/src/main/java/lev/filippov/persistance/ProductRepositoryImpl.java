@@ -3,18 +3,22 @@ package lev.filippov.persistance;
 import lev.filippov.models.Product;
 import lev.filippov.models.dto.ProductDto;
 
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.BeforeDestroyed;
 import javax.inject.Named;
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.*;
 
-@Named("productRepository")
-@ApplicationScoped
-public class ProductRepositoryImpl implements JPARepository<Product>, Serializable {
+//@Named("productRepository")
+//@ApplicationScoped
+@Stateless(name = "productRepository")
+public class ProductRepositoryImpl implements ProductJPARepository, Serializable {
 
     @PersistenceContext(unitName = "ds")
     protected EntityManager em;
@@ -40,12 +44,21 @@ public class ProductRepositoryImpl implements JPARepository<Product>, Serializab
 //    private Long getId() {
 //        return ++counter;
 //    }
-    @Transactional
+//    @Transactional
+    @TransactionAttribute
     public List<Product> getAll(){
-        return em.createQuery("SELECT p FROM Product p", Product.class).getResultList();
+        EntityGraph<?> eg = em.getEntityGraph("products-with-categories-and-brands");
+        return em.createQuery("SELECT p FROM Product p", Product.class)
+                .setHint("javax.persistence.loadgraph",eg).getResultList();
+
+        //return em.createQuery("from Product p left join fetch p.category", Product.class)
+//        return em.createQuery("from Product", Product.class)
+//                .setHint("javax.persistence.loadgraph", eg)
+//                .getResultList();
     }
 
-    @Transactional
+//    @Transactional
+    @TransactionAttribute
     public void save(Product product) {
 //        if(product.getId()==null){
 //            product.setId(getId());
@@ -57,27 +70,30 @@ public class ProductRepositoryImpl implements JPARepository<Product>, Serializab
         return Optional.ofNullable(em.find(Product.class,id));
     }
 
-    @Transactional
+//    @Transactional
+    @TransactionAttribute
     public void delete(Product product) {
         em.createQuery("DELETE from Product p where p.id = :id").setParameter("id", product.getId()).executeUpdate();
 //        em.remove(product);
     }
 
-    @Transactional
-    @BeforeDestroyed(ApplicationScoped.class)
-    public void destroy() {
-        em.createQuery("DELETE from Product p").executeUpdate();
-    }
+//    @Transactional
+//    @BeforeDestroyed(ApplicationScoped.class)
+//    public void destroy() {
+//        em.createQuery("DELETE from Product p").executeUpdate();
+//    }
 
-    @Transactional
     @Override
     public Long count() {
         return em.createQuery("SELECT count(*) from Product", Long.class).getSingleResult();
     }
 
-    @Transactional
+//    @Transactional
+    @TransactionAttribute
     public List<Product> findAllbyCategory(Long categoryId) {
+        EntityGraph<?> eg = em.getEntityGraph("products-with-categories-and-brands");
         return em.createQuery("SELECT p FROM Product p WHERE p.category.id = :id", Product.class)
+                .setHint("javax.persistence.loadgraph",eg)
                 .setParameter("id",categoryId).getResultList();
     };
 

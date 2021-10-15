@@ -6,6 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="remote-jsf-api" />
+        <module name="remote-ejb-app" />
         <module name="first-web-app" />
         <module name="first-jsf-app" />
       </profile>

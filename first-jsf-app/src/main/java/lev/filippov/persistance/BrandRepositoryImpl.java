@@ -4,6 +4,7 @@ import lev.filippov.models.Brand;
 import lev.filippov.models.Category;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.TransactionAttribute;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -61,7 +62,6 @@ public class BrandRepositoryImpl implements JPARepository<Brand>{
     public Optional<Brand> getProductById(Long id) {
         return Optional.ofNullable(em.find(Brand.class, id));
     }
-
 
     public void delete(Brand brand) {
         em.createQuery("DELETE from Brand b where b.id = :id").setParameter("id", brand.getId()).executeUpdate();

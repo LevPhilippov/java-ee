@@ -1,15 +1,18 @@
 package lev.filippov.service;
 
+import lev.filippov.ProductRemoteDto;
+import lev.filippov.RemoteProductService;
 import lev.filippov.models.Brand;
 import lev.filippov.models.Category;
 import lev.filippov.models.Product;
 import lev.filippov.models.dto.ProductDto;
-import lev.filippov.persistance.BrandRepositoryImpl;
-import lev.filippov.persistance.CategoryRepositoryImpl;
-import lev.filippov.persistance.JPARepository;
-import lev.filippov.persistance.ProductRepositoryImpl;
+import lev.filippov.persistance.*;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.ejb.Local;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,13 +21,17 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Named
-@ApplicationScoped
-public class ProductService {
+//@Named
+//@ApplicationScoped
+@Stateless
+@Local(value = LocalProductService.class)
+@Remote(value = RemoteProductService.class)
+public class ProductService implements LocalProductService, RemoteProductService {
 
-    @Inject
-    @Named("productRepository")
-    JPARepository<Product> productRepository;
+//    @Inject
+//    @Named("productRepository")
+    @EJB(name = "productRepository")
+    ProductJPARepository productRepository;
 
     @Inject
     @Named("categoryRepository")
@@ -33,8 +40,6 @@ public class ProductService {
     @Inject
     @Named("brandRepository")
     JPARepository<Brand> brandRepository;
-
-
 
 
     @PostConstruct
@@ -55,7 +60,7 @@ public class ProductService {
     };
 
     public List<ProductDto> getAll(Long catId) {
-        return ((ProductRepositoryImpl)productRepository).findAllbyCategory(catId).stream().map(ProductService::productToDto).collect(Collectors.toList());
+        return productRepository.findAllbyCategory(catId).stream().map(ProductService::productToDto).collect(Collectors.toList());
     };
 
 
@@ -73,7 +78,7 @@ public class ProductService {
         return null;
     };
 
-   public  void delete(Product product) {
+    public  void delete(Product product) {
     productRepository.delete(product);
    };
 
@@ -89,4 +94,16 @@ public class ProductService {
     }
 
 
+    @Override
+    public List<ProductRemoteDto> getAllRemote() {
+        return productRepository.getAll().stream()
+                .map(product -> new ProductRemoteDto(product.getId(),
+                product.getName(),
+                product.getPrice(),
+                product.getCategory().getId(),
+                product.getCategory().getName(),
+                product.getBrand().getId(),
+                product.getBrand().getName()))
+                .collect(Collectors.toList());
+    }
 }
