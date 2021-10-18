@@ -63,8 +63,8 @@ public class BrandRepositoryImpl implements JPARepository<Brand>{
         return Optional.ofNullable(em.find(Brand.class, id));
     }
 
-    public void delete(Brand brand) {
-        em.createQuery("DELETE from Brand b where b.id = :id").setParameter("id", brand.getId()).executeUpdate();
+    public void delete(Long id) {
+        em.createQuery("DELETE from Brand b where b.id = :id").setParameter("id", id).executeUpdate();
     }
 
     @Override
@@ -72,6 +72,7 @@ public class BrandRepositoryImpl implements JPARepository<Brand>{
         return em.createQuery("SELECT count(*) from Brand", Long.class).getSingleResult();
     }
 
+    @Transactional
     public Brand getReference(Long id){
         return em.getReference(Brand.class, id);
     }

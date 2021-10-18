@@ -5,7 +5,7 @@ import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 @WebFilter(urlPatterns = {"/*", ""})
-public class SimpleFilter implements Filter {
+public class EncodingFilter implements Filter {
 
     private FilterConfig filterConfig;
 

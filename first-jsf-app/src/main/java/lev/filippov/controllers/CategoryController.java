@@ -40,7 +40,7 @@ public class CategoryController implements Serializable {
     }
 
     public String deleteCat(Category cat) {
-        cr.delete(cat);
+        cr.delete(cat.getId());
         return "category.xhtml?faces-redirect=true";
     }
 

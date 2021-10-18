@@ -15,15 +15,16 @@ public class CartService {
     public Map<CartItem, Integer> cart = new HashMap<>();
 
     public void addToCart(ProductDto product) {
-        CartItem item = new CartItem(product, null, product.getPrice());
-        if(cart.containsKey(item))
-            cart.put(item, cart.get(item)+1);
-        else
-            cart.put(item, 1);
+        CartItem item = new CartItem(product);
+        cart.put(item, cart.getOrDefault(item,0) + item.getQty());
+//        if(cart.containsKey(item))
+//            cart.put(item, cart.get(item)+1);
+//        else
+//            cart.put(item, 1);
     }
 
     public void removeFromCart(ProductDto product){
-        CartItem item = new CartItem(product, null, product.getPrice());
+        CartItem item = new CartItem(product);
         if(cart.containsKey(item)) {
             if(cart.get(item) == 1)
                 cart.remove(item);

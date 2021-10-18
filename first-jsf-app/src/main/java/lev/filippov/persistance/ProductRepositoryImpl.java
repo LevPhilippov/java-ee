@@ -17,7 +17,7 @@ import java.util.*;
 
 //@Named("productRepository")
 //@ApplicationScoped
-@Stateless(name = "productRepository")
+@Stateless
 public class ProductRepositoryImpl implements ProductJPARepository, Serializable {
 
     @PersistenceContext(unitName = "ds")
@@ -45,25 +45,22 @@ public class ProductRepositoryImpl implements ProductJPARepository, Serializable
 //        return ++counter;
 //    }
 //    @Transactional
-    @TransactionAttribute
+
     public List<Product> getAll(){
         EntityGraph<?> eg = em.getEntityGraph("products-with-categories-and-brands");
         return em.createQuery("SELECT p FROM Product p", Product.class)
                 .setHint("javax.persistence.loadgraph",eg).getResultList();
 
         //return em.createQuery("from Product p left join fetch p.category", Product.class)
-//        return em.createQuery("from Product", Product.class)
-//                .setHint("javax.persistence.loadgraph", eg)
-//                .getResultList();
     }
-
-//    @Transactional
     @TransactionAttribute
     public void save(Product product) {
 //        if(product.getId()==null){
 //            product.setId(getId());
 //        }
+
         em.persist(em.merge(product));
+//        em.persist(product);
     }
 
     public Optional<Product> getProductById(Long id) {
@@ -72,8 +69,8 @@ public class ProductRepositoryImpl implements ProductJPARepository, Serializable
 
 //    @Transactional
     @TransactionAttribute
-    public void delete(Product product) {
-        em.createQuery("DELETE from Product p where p.id = :id").setParameter("id", product.getId()).executeUpdate();
+    public void delete(Long id) {
+        em.createQuery("DELETE from Product p where p.id = :id").setParameter("id", id).executeUpdate();
 //        em.remove(product);
     }
 

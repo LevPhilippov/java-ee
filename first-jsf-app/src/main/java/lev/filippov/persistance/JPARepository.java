@@ -11,7 +11,7 @@ public interface JPARepository<T> {
 
     Optional<T> getProductById(Long id);
 
-    void delete(T t);
+    void delete(Long id);
 
     Long count();
 }

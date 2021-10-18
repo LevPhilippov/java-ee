@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ProductJPARepository extends JPARepository<Product> {
 
-    public List<Product> findAllbyCategory(Long categoryId);
+    List<Product> findAllbyCategory(Long categoryId);
 
 }

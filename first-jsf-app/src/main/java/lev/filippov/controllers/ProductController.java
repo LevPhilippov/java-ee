@@ -4,7 +4,7 @@ import lev.filippov.models.Brand;
 import lev.filippov.models.Product;
 import lev.filippov.models.dto.ProductDto;
 import lev.filippov.service.BrandService;
-import lev.filippov.service.LocalProductService;
+import lev.filippov.service.ProductService;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named
@@ -26,7 +27,7 @@ public class ProductController implements Serializable {
 
 //    @Inject
     @EJB
-    LocalProductService productService;
+    ProductService productService;
 
     @Setter
     @Getter
@@ -47,20 +48,22 @@ public class ProductController implements Serializable {
     @Setter
     Long categoryId;
 
+
     public void preloadData(ComponentSystemEvent componentSystemEvent){
         this.brandList = brandService.getAll();
         if (request.getParameter("categoryId") != null)
             this.categoryId = Long.parseLong(request.getParameter("categoryId"));
-        this.productList = findAll();
+        else {
+            this.categoryId = null;
+            this.productList = findAll();
+        }
     }
 
 
     public List<ProductDto> findAll() {
-        if(request.getParameter("categoryId") != null)
+        if(categoryId != null)
             this.productList = productService.getAll(categoryId);
-        else
-        {
-            this.categoryId = null;
+        else {
             this.productList = productService.getAll();
         }
         return productList;
@@ -71,7 +74,7 @@ public class ProductController implements Serializable {
         return "product_form.xhtml?faces-redirect=true";
     }
 
-    public void deleteProduct(Product product) {
+    public void deleteProduct(ProductDto product) {
         productService.delete(product);
 //        return "products.xhtml?faces-redirect=true"; Updateted by Ajax
     }

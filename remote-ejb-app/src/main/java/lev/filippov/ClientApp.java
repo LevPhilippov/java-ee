@@ -14,9 +14,9 @@ public class ClientApp {
         Context context = createInitialContext();
 
         RemoteProductService prodService = (RemoteProductService) context
-                .lookup("ejb:/web_app_name//ProductBean!ru.geekbrains.ProductServiceRemote");
+                .lookup("ejb:/first-jsf-app/ProductServiceImpl!lev.filippov.RemoteProductService");
         prodService.getAllRemote()
-                .forEach(p -> System.out.printf("%d\t%s\t%d\n", p.getId(), p.getName(), p.getPrice()));
+                .forEach(p -> System.out.printf("%d\t%s\t%s\n", p.getId(), p.getName(), p.getPrice().toString()));
     }
 
     public static Context createInitialContext() throws IOException, NamingException {

@@ -12,7 +12,6 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class CartItem {
 
     private ProductDto product;
@@ -20,6 +19,12 @@ public class CartItem {
     private Integer qty;
 
     private BigDecimal price;
+
+    public CartItem(ProductDto product) {
+        this.product = product;
+        this.qty = 1;
+        this.price = product.getPrice();
+    }
 
     @Override
     public boolean equals(Object o) {

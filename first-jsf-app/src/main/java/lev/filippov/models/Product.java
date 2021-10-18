@@ -14,6 +14,11 @@ import java.math.BigDecimal;
 @NamedEntityGraph(name = "products-with-categories-and-brands",attributeNodes = {@NamedAttributeNode("category"), @NamedAttributeNode("brand")})
 public class Product implements Serializable {
 
+    public Product(String name, BigDecimal price) {
+        this.name = name;
+        this.price = price;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +29,7 @@ public class Product implements Serializable {
     @Column
     private BigDecimal price;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "categoryId", referencedColumnName = "id")
     private Category category;
 

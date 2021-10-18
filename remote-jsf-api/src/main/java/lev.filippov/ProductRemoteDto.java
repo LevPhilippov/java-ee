@@ -1,8 +1,9 @@
 package lev.filippov;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class ProductRemoteDto {
+public class ProductRemoteDto implements Serializable {
 
         private Long id;
 

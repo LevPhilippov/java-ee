@@ -81,7 +81,8 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <!--        PostgreSQL-->
+
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -96,17 +97,25 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.wildfly</groupId>
-            <artifactId>wildfly-ejb-client-bom</artifactId>
-            <version>17.0.1.Final</version>
-            <type>pom</type>
-        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>org.wildfly</groupId>-->
+<!--            <artifactId>wildfly-ejb-client-bom</artifactId>-->
+<!--            <version>17.0.1.Final</version>-->
+<!--            <type>pom</type>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.jboss.spec.javax.ejb</groupId>
             <artifactId>jboss-ejb-api_3.2_spec</artifactId>
             <version>2.0.0.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.1.1</version>
             <scope>provided</scope>
         </dependency>
 

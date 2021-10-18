@@ -3,6 +3,7 @@ package lev.filippov.models.dto;
 import lev.filippov.models.Category;
 import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @NoArgsConstructor
@@ -10,7 +11,12 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ProductDto {
+public class ProductDto implements Serializable {
+
+    public ProductDto(String name, BigDecimal price) {
+        this.name = name;
+        this.price = price;
+    }
 
     private Long id;
 

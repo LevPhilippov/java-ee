@@ -65,8 +65,9 @@ public class CategoryRepositoryImpl implements JPARepository<Category> {
     }
 
     @Transactional
-    public void delete(Category cat) {
-        em.createQuery("delete from Category c where c.id=:id").setParameter("id", cat.getId()).executeUpdate();
+    public void delete(Long id) {
+        em.createQuery("DELETE from Category c where c.id=:id").setParameter("id", id).executeUpdate();
+//        em.remove(em.merge(cat));
     }
 
     @Override
@@ -74,6 +75,7 @@ public class CategoryRepositoryImpl implements JPARepository<Category> {
         return em.createQuery("SELECT count(*) from Category", Long.class).getSingleResult();
     }
 
+    @Transactional
     public Category getReference(Long id){
         return em.getReference(Category.class, id);
     }
