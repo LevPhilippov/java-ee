@@ -1,0 +1,49 @@
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pp="http://primefaces.org/ui" lang="en"
+>
+
+<h:head>
+    <ui:include src="WEB-INF/fragments/head.xhtml"/>
+</h:head>
+
+<h:body>
+    <ui:include src="WEB-INF/fragments/navigation.xhtml">
+        <ui:param name="pageName" value="Cart"/>
+    </ui:include>
+
+<div class="container">
+    <div class="row py-2">
+        <div class="col-md-9 col-xs-12" >
+            <h:form id="cartform">
+                <h:dataTable value="#{cartController.findAll()}" var="cartItem" styleClass="table table-bordered">
+                    <h:column>
+                        <f:facet name="header">Title</f:facet>
+                        #{cartItem.product.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Brand</f:facet>
+                        #{cartItem.product.brandName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Price</f:facet>
+                        #{cartItem.product.price}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Quantity</f:facet>
+                        #{cartItem.qty}
+                    </h:column>
+                    <h:column>
+                        <h:commandButton value="Delete from cart" action="#{cartController.removeFromCart(cartItem)}" styleClass="btn btn-success">
+                            <f:ajax event="click" render="cartform"/>
+                        </h:commandButton>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </div>
+    </div>
+</div>
+    <ui:include src="WEB-INF/fragments/script.xhtml"/>
+</h:body>
+</html>

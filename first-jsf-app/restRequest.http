@@ -1,0 +1,43 @@
+GET http://127.0.0.1:8080/first-jsf-app/api/v1/products
+
+###
+
+GET http://127.0.0.1:8080/first-jsf-app/api/v1/products/66
+
+###
+
+GET http://127.0.0.1:8080/first-jsf-app/api/v1/products/category/6
+
+###
+
+POST http://127.0.0.1:8080/first-jsf-app/api/v1/products
+content-type:application/json
+
+  {
+    "categoryName": "Сладости",
+    "name": "Хуякер",
+    "price": 333.00
+  }
+
+###
+PUT http://127.0.0.1:8080/first-jsf-app/api/v1/products
+content-type:application/json
+
+{
+  "brandId": 3,
+  "brandName": "Lacoste",
+  "categoryId": 6,
+  "categoryName": "Сладости",
+  "id": 67,
+  "name": "Сахар",
+  "price": 400.00
+}
+
+###
+
+DELETE http://127.0.0.1:8080/first-jsf-app/api/v1/products/67
+
+
+
+
+
