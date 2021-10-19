@@ -54,7 +54,7 @@ public class ProductServiceImpl implements RemoteProductService, ProductService,
     }
 
 
-    public List<ProductDto> getAll(Long catId) {
+    public List<ProductDto> getAllProductsByCategoryId(Long catId) {
         return productRepository.findAllbyCategory(catId).stream().map(ProductServiceImpl::productToDto).collect(Collectors.toList());
     }
 

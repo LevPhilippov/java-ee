@@ -3,7 +3,6 @@ package lev.filippov.service;
 import lev.filippov.models.Category;
 import lev.filippov.models.Product;
 import lev.filippov.models.dto.CategoryDto;
-import lev.filippov.models.dto.ProductDto;
 import lev.filippov.persistance.interfaces.JPARepository;
 import lev.filippov.persistance.interfaces.ProductJPARepository;
 import lev.filippov.service.rest.CategoryRestService;
@@ -27,13 +26,17 @@ public class CategoryServiceImpl implements CategoryRestService {
     @EJB
     ProductJPARepository productRepository;
 
-    public List<Category> getAll() {
-        return categoryRepository.getAll();
+    @Override
+    public List<CategoryDto> getAll() {
+        return categoryRepository.getAll().stream().map(this::convertCatToDto).collect(Collectors.toList());
     }
 
     @Transactional
-    public void save(Category category) {
-        categoryRepository.save(category);
+    public void save(CategoryDto category) {
+        categoryRepository.save(new Category(category.getId(), category.getName(),
+                category.getProductDtoList().stream()
+                .map(dto->productRepository.getReference(dto.getId()))
+                .collect(Collectors.toList())));
     }
 
     @Transactional
@@ -42,17 +45,28 @@ public class CategoryServiceImpl implements CategoryRestService {
     }
 
     @Override
-    public List<CategoryDto> getCategoryById() {
-        return categoryRepository.getAll()
-                .stream().map(cat->new CategoryDto(cat.getId(),cat.getName(), getProductsByCategory(cat.getId()))).collect(Collectors.toList());
-    }
-
-    @Override
     public CategoryDto getCategoryById(Long id) {
-        Category category = categoryRepository.getProductById(id).orElseThrow(RuntimeException::new);
-        return new CategoryDto(category.getId(), category.getName(), getProductsByCategory(id));
+        return convertCatToDto(categoryRepository.getProductById(id).orElseThrow(RuntimeException::new));
     }
 
+    @Transactional
+    @Override
+    public void delete(Long id) {
+        categoryRepository.delete(id);
+    }
+
+//    public List<ProductDto> getProductsByCategory(Long id) {
+//        List<Product> allbyCategory = productRepository.findAllbyCategory(id);
+//        return allbyCategory.stream().map(ProductServiceImpl::productToDto).collect(Collectors.toList());
+//    }
+
+
+    private CategoryDto convertCatToDto(Category category) {
+        return new CategoryDto(category.getId(), category.getName(),
+                category.getProducts().stream().map(ProductServiceImpl::productToDto).collect(Collectors.toList()));
+    }
+
+    ///REST METHODS
     @Transactional
     @Override
     public void update(CategoryDto category) {
@@ -79,18 +93,6 @@ public class CategoryServiceImpl implements CategoryRestService {
                 }).collect(Collectors.toList());
         categoryRepository.save(new Category(null, category.getName(), productList));
     }
-
-    @Transactional
-    @Override
-    public void delete(Long id) {
-        categoryRepository.delete(id);
-    }
-
-    public List<ProductDto> getProductsByCategory(Long id) {
-        List<Product> allbyCategory = productRepository.findAllbyCategory(id);
-        return allbyCategory.stream().map(ProductServiceImpl::productToDto).collect(Collectors.toList());
-    }
-
 
 
 }

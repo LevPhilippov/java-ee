@@ -61,7 +61,7 @@ public class ProductController implements Serializable {
 
     public List<ProductDto> findAll() {
         if(categoryId != null)
-            this.productList = productService.getAll(categoryId);
+            this.productList = productService.getAllProductsByCategoryId(categoryId);
         else {
             this.productList = productService.getAll();
         }

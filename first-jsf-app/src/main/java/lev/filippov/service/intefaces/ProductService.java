@@ -10,7 +10,7 @@ public interface ProductService {
 
     List<ProductDto> getAll();
 
-    List<ProductDto> getAll(Long catId);
+    List<ProductDto> getAllProductsByCategoryId(Long catId);
 
     void save(ProductDto dto);
 

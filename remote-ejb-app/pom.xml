@@ -33,6 +33,13 @@
         </dependency>
 
         <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-jms-client-bom</artifactId>
+            <type>pom</type>
+            <version>18.0.1.Final</version>
+        </dependency>
+
+        <dependency>
             <groupId>lev.filippov</groupId>
             <artifactId>remote-jsf-api</artifactId>
             <version>1.0-SNAPSHOT</version>

@@ -15,7 +15,7 @@ public interface ProductRestService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/category/{id}")
-    List<ProductDto> getAll(@PathParam("id") Long catId);
+    List<ProductDto> getAllProductsByCategoryId(@PathParam("id") Long catId);
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

@@ -13,7 +13,7 @@ public interface CategoryRestService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    List<CategoryDto> getCategoryById();
+    List<CategoryDto> getAll();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

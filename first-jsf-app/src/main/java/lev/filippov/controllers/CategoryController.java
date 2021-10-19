@@ -1,6 +1,7 @@
 package lev.filippov.controllers;
 
 import lev.filippov.models.Category;
+import lev.filippov.models.dto.CategoryDto;
 import lev.filippov.service.CategoryServiceImpl;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,31 +22,32 @@ public class CategoryController implements Serializable {
 
     @Getter
     @Setter
-    List<Category> categoryList;
+    List<CategoryDto> categoryList;
+
+    @Getter
+    @Setter
+    CategoryDto cat;
 
     public void preloadData () {
         this.categoryList = categoryService.getAll();
     }
-    @Getter
-    @Setter
-    Category cat;
 
-    public List<Category> findAll() {
+    public List<CategoryDto> findAll() {
         return categoryService.getAll();
     }
 
-    public String editCat(Category cat) {
+    public String editCat(CategoryDto cat) {
         this.cat=cat;
         return "category_form.xhtml?faces-redirect=true";
     }
 
-    public String deleteCat(Category cat) {
+    public String deleteCat(CategoryDto cat) {
         categoryService.delete(cat.getId());
         return "category.xhtml?faces-redirect=true";
     }
 
     public Object newCategory() {
-        this.cat = new Category();
+        this.cat = new CategoryDto();
         return "category_form.xhtml?faces-redirect=true";
     }
 

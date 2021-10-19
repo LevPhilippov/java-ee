@@ -21,7 +21,7 @@ public class Category implements Serializable {
     @Column
     private String name;
     //TODO: Можно попробовать обновить FOREIGN KEY в БД на каскадные операции - включить операцию INSERT.
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Product> products;
 
     @Override

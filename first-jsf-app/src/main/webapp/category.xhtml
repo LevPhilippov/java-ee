@@ -22,6 +22,8 @@
 
 <h:body>
 
+    <f:event listener="#{categoryController.preloadData}" type="preRenderView"/>
+
     <ui:include src="WEB-INF/fragments/navigation.xhtml">
         <ui:param name="pageName" value="Category"/>
     </ui:include>
@@ -40,7 +42,7 @@
         <div class="col-md-9 col-xs-12" >
             <h:form>
                 <h:commandButton value="Add Category" styleClass="btn btn-primary my-2" action="#{categoryController.newCategory()}"/>
-                <h:dataTable value="#{categoryController.findAll()}"  var="cat" styleClass="table table-bordered">
+                <h:dataTable value="#{categoryController.categoryList}"  var="cat" styleClass="table table-bordered">
                     <h:column>
                         <f:facet name="header">Id</f:facet>
                         #{cat.id}
