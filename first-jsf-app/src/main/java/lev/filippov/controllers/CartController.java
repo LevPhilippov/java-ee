@@ -25,7 +25,6 @@ public class CartController implements Serializable {
         return cartService.getAll();
     }
 
-
     public void removeFromCart(CartItem cartItem) {
         cartService.removeFromCart(cartItem);
     }

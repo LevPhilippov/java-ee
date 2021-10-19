@@ -1,10 +1,9 @@
 package lev.filippov.persistance;
 
 import lev.filippov.models.Brand;
-import lev.filippov.models.Category;
+import lev.filippov.persistance.interfaces.JPARepository;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.TransactionAttribute;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,8 +17,7 @@ import java.util.Optional;
 
 @Named("brandRepository")
 @ApplicationScoped
-@Transactional
-public class BrandRepositoryImpl implements JPARepository<Brand>{
+public class BrandRepositoryImpl implements JPARepository<Brand> {
 
     @PersistenceContext(unitName = "ds")
     protected EntityManager em;

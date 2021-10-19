@@ -23,8 +23,13 @@
         <div class="col-md-3 col-xs-12">
             <div class="list-group my-2">
                 <ui:repeat value="#{categoryController.findAll()}" var="category">
-                    <h:link styleClass="list-group-item list-group-item-action #{category.id == productController.categoryId ? 'active' : ''}" value="#{category.name}" outcome="/products">
+                    <h:link styleClass="list-group-item list-group-item-action
+                    #{category.id == productController.categoryId ? 'active' : ''}"
+                            value="#{category.name}" outcome="/products"
+                    >
+
                         <f:param name="categoryId" value="#{category.id}"/>
+
                     </h:link>
                 </ui:repeat>
                 <h:link styleClass="list-group-item list-group-item-action

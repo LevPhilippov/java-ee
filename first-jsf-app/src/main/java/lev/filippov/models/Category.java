@@ -1,15 +1,15 @@
 package lev.filippov.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category implements Serializable {
@@ -20,11 +20,20 @@ public class Category implements Serializable {
 
     @Column
     private String name;
-
-    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
+    //TODO: Можно попробовать обновить FOREIGN KEY в БД на каскадные операции - включить операцию INSERT.
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Product> products;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return id.equals(category.id);
+    }
 
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

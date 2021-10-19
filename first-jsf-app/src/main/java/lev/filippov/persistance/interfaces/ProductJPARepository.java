@@ -1,4 +1,4 @@
-package lev.filippov.persistance;
+package lev.filippov.persistance.interfaces;
 
 import lev.filippov.models.Product;
 

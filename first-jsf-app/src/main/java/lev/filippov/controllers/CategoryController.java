@@ -1,7 +1,7 @@
 package lev.filippov.controllers;
 
 import lev.filippov.models.Category;
-import lev.filippov.persistance.CategoryRepositoryImpl;
+import lev.filippov.service.CategoryServiceImpl;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,22 +16,21 @@ import java.util.List;
 public class CategoryController implements Serializable {
 
     @Inject
-    @Named("categoryRepository")
-    CategoryRepositoryImpl cr;
+    CategoryServiceImpl categoryService;
 
     @Getter
     @Setter
     List<Category> categoryList;
 
     public void preloadData () {
-        this.categoryList = cr.getAll();
+        this.categoryList = categoryService.getAll();
     }
     @Getter
     @Setter
     Category cat;
 
     public List<Category> findAll() {
-        return cr.getAll();
+        return categoryService.getAll();
     }
 
     public String editCat(Category cat) {
@@ -40,7 +39,7 @@ public class CategoryController implements Serializable {
     }
 
     public String deleteCat(Category cat) {
-        cr.delete(cat.getId());
+        categoryService.delete(cat.getId());
         return "category.xhtml?faces-redirect=true";
     }
 
@@ -50,7 +49,7 @@ public class CategoryController implements Serializable {
     }
 
     public String saveCat() {
-        cr.save(cat);
+        categoryService.save(cat);
         return "category.xhtml?faces-redirect=true";
     }
 }

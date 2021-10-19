@@ -1,38 +1,35 @@
 package lev.filippov.service.rest;
 
+import lev.filippov.models.Category;
+import lev.filippov.models.dto.CategoryDto;
 import lev.filippov.models.dto.ProductDto;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("/v1/products")
-public interface ProductRestService {
+@Path("/v1/category")
+public interface CategoryRestService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    List<ProductDto> getAll();
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/category/{id}")
-    List<ProductDto> getAll(@PathParam("id") Long catId);
+    List<CategoryDto> getCategoryById();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    ProductDto getProductById(@PathParam("id") Long id);
+    CategoryDto getCategoryById(@PathParam("id") Long id);
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    void insert(ProductDto dto);
+    void insert(CategoryDto dto);
 
     @PUT
     @Consumes("application/json")
-    void update(ProductDto dto);
+    void update(CategoryDto dto);
 
     @DELETE
     @Path("/{id}")
     void delete(@PathParam("id") Long id);
-
 
 }

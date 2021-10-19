@@ -1,7 +1,7 @@
 package lev.filippov.service;
 
 import lev.filippov.models.Brand;
-import lev.filippov.persistance.JPARepository;
+import lev.filippov.persistance.interfaces.JPARepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

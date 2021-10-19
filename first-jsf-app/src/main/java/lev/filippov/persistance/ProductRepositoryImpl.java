@@ -1,17 +1,13 @@
 package lev.filippov.persistance;
 
 import lev.filippov.models.Product;
-import lev.filippov.models.dto.ProductDto;
+import lev.filippov.persistance.interfaces.ProductJPARepository;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.BeforeDestroyed;
-import javax.inject.Named;
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.*;
 
@@ -94,4 +90,9 @@ public class ProductRepositoryImpl implements ProductJPARepository, Serializable
                 .setParameter("id",categoryId).getResultList();
     };
 
+    @TransactionAttribute
+    @Override
+    public Product getReference(Long id) {
+        return em.getReference(Product.class,id);
+    }
 }

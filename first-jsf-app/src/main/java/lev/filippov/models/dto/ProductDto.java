@@ -1,6 +1,5 @@
 package lev.filippov.models.dto;
 
-import lev.filippov.models.Category;
 import lombok.*;
 
 import java.io.Serializable;

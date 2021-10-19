@@ -1,4 +1,4 @@
-package lev.filippov.persistance;
+package lev.filippov.persistance.interfaces;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,4 +14,6 @@ public interface JPARepository<T> {
     void delete(Long id);
 
     Long count();
+
+    T getReference(Long id);
 }

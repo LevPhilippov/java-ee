@@ -1,4 +1,4 @@
-package lev.filippov.service;
+package lev.filippov.service.intefaces;
 
 import lev.filippov.models.Product;
 import lev.filippov.models.dto.ProductDto;
@@ -14,8 +14,8 @@ public interface ProductService {
 
     void save(ProductDto dto);
 
-    Optional<Product> getProductById(Long id);
+    ProductDto getProductById(Long id);
 
-     void delete(ProductDto product);
+    void delete(Long id);
 
 }

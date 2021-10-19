@@ -2,15 +2,23 @@ package lev.filippov.service;
 
 import lev.filippov.models.CartItem;
 import lev.filippov.models.dto.ProductDto;
+import lev.filippov.persistance.interfaces.ProductJPARepository;
+import lev.filippov.service.intefaces.ProductService;
+import lev.filippov.service.rest.CartRestService;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateful;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Stateful
-public class CartService {
+public class CartService implements Serializable{
+
+//    @EJB
+//    ProductService productService;
 
     public Map<CartItem, Integer> cart = new HashMap<>();
 
@@ -47,4 +55,9 @@ public class CartService {
         return new ArrayList<CartItem>(cart.keySet());
     }
 
+
+//    public List<CartItem> addToCart(Long id) {
+//        addToCart(productService.getProductById(id));
+//        return getAll();
+//    }
 }

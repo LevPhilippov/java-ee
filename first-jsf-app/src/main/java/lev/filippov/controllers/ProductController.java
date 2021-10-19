@@ -1,10 +1,9 @@
 package lev.filippov.controllers;
 
 import lev.filippov.models.Brand;
-import lev.filippov.models.Product;
 import lev.filippov.models.dto.ProductDto;
 import lev.filippov.service.BrandService;
-import lev.filippov.service.ProductService;
+import lev.filippov.service.intefaces.ProductService;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +14,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Named
@@ -55,8 +53,8 @@ public class ProductController implements Serializable {
             this.categoryId = Long.parseLong(request.getParameter("categoryId"));
         else {
             this.categoryId = null;
-            this.productList = findAll();
         }
+        this.productList = findAll();
     }
 
 
@@ -75,7 +73,7 @@ public class ProductController implements Serializable {
     }
 
     public void deleteProduct(ProductDto product) {
-        productService.delete(product);
+        productService.delete(product.getId());
 //        return "products.xhtml?faces-redirect=true"; Updateted by Ajax
     }
 

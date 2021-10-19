@@ -1,6 +1,7 @@
 package lev.filippov.persistance;
 
 import lev.filippov.models.Category;
+import lev.filippov.persistance.interfaces.JPARepository;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -52,10 +53,9 @@ public class CategoryRepositoryImpl implements JPARepository<Category> {
 //    }
 
     public List<Category> getAll(){
-        return em.createQuery("SELECT c FROM Category c",Category.class).getResultList();
+        return em.createQuery("SELECT c FROM Category c", Category.class).getResultList();
     }
 
-    @Transactional
     public void save(Category cat) {
         em.persist(em.merge(cat));
     }
@@ -64,18 +64,15 @@ public class CategoryRepositoryImpl implements JPARepository<Category> {
         return Optional.ofNullable(em.find(Category.class, id));
     }
 
-    @Transactional
     public void delete(Long id) {
         em.createQuery("DELETE from Category c where c.id=:id").setParameter("id", id).executeUpdate();
 //        em.remove(em.merge(cat));
     }
-
     @Override
     public Long count() {
         return em.createQuery("SELECT count(*) from Category", Long.class).getSingleResult();
     }
 
-    @Transactional
     public Category getReference(Long id){
         return em.getReference(Category.class, id);
     }
