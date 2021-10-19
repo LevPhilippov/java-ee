@@ -1,10 +1,9 @@
 package lev.filippov.service;
 
 import lev.filippov.models.CartItem;
+import lev.filippov.models.Product;
 import lev.filippov.models.dto.ProductDto;
-import lev.filippov.persistance.interfaces.ProductJPARepository;
 import lev.filippov.service.intefaces.ProductService;
-import lev.filippov.service.rest.CartRestService;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
@@ -17,8 +16,8 @@ import java.util.Map;
 @Stateful
 public class CartService implements Serializable{
 
-//    @EJB
-//    ProductService productService;
+    @EJB
+    ProductService productService;
 
     public Map<CartItem, Integer> cart = new HashMap<>();
 
@@ -56,8 +55,7 @@ public class CartService implements Serializable{
     }
 
 
-//    public List<CartItem> addToCart(Long id) {
-//        addToCart(productService.getProductById(id));
-//        return getAll();
-//    }
+    public void addToCart(Long id) {
+        addToCart(productService.getProductById(id));
+    }
 }
