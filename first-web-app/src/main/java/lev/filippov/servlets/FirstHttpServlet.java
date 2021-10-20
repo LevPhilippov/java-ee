@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/catalog")
-public class    FirstHttpServlet extends HttpServlet {
+public class FirstHttpServlet extends HttpServlet {
 
     Logger logger;
 

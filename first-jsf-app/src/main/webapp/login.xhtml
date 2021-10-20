@@ -1,0 +1,38 @@
+<html         xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://xmlns.jcp.org/jsf/core"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+lang="en">
+
+<ui:include src="WEB-INF/fragments/head.xhtml"/>
+
+<h:body>
+
+<ui:include src="WEB-INF/fragments/navigation.xhtml"/>
+
+    <div class="container">
+        <div class="row py-2">
+            <div class="col-12">
+
+                <form action="j_security_check" method="post">
+                    <div class="form-group">
+                        <h:outputLabel value="Name" for="j_username"/>
+                        <h:inputText styleClass="form-control" id="j_username" name="j_username"  placeholder="Enter login"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Password" for="j_password"/>
+                        <h:inputText styleClass="form-control" id="j_password" name="j_password"  placeholder="Enter password"/>
+                    </div>
+                    <button type="submit">Login</button>
+
+                </form>
+                <h:form>
+                </h:form>
+            </div>
+        </div>
+    </div>
+
+    <ui:include src="WEB-INF/fragments/script.xhtml"></ui:include>
+
+</h:body>
+</html>
