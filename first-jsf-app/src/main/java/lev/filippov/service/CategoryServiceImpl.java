@@ -33,10 +33,7 @@ public class CategoryServiceImpl implements CategoryRestService {
 
     @Transactional
     public void save(CategoryDto category) {
-        categoryRepository.save(new Category(category.getId(), category.getName(),
-                category.getProductDtoList().stream()
-                .map(dto->productRepository.getReference(dto.getId()))
-                .collect(Collectors.toList())));
+        categoryRepository.save(new Category(category.getId(), category.getName(), null));
     }
 
     @Transactional
@@ -73,11 +70,9 @@ public class CategoryServiceImpl implements CategoryRestService {
         if(category.getId() == null) {
             throw new RuntimeException("Id shouldn't be null!");
         }
-        List<Product> productList = category.getProductDtoList().stream()
-                .map(productDto -> {
-                    return productRepository.getReference(productDto.getId());
-                }).collect(Collectors.toList());
-        categoryRepository.save(new Category(null, category.getName(), productList));
+//        List<Product> productList = category.getProductDtoList().stream()
+//                .map(productDto -> productRepository.getReference(productDto.getId())).collect(Collectors.toList());
+        categoryRepository.save(new Category(null, category.getName(), null));
     }
 
     @Override
@@ -87,11 +82,11 @@ public class CategoryServiceImpl implements CategoryRestService {
             throw new RuntimeException("Id should be null!");
         }
         //ассоцияция с продуктами не работает
-        List<Product> productList = category.getProductDtoList().stream()
-                .map(productDto -> {
-                    return productRepository.getReference(productDto.getId());
-                }).collect(Collectors.toList());
-        categoryRepository.save(new Category(null, category.getName(), productList));
+//        List<Product> productList = category.getProductDtoList().stream()
+//                .map(productDto -> {
+//                    return productRepository.getReference(productDto.getId());
+//                }).collect(Collectors.toList());
+        categoryRepository.save(new Category(null, category.getName(), null));
     }
 
 

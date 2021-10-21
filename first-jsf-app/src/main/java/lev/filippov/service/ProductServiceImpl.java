@@ -6,7 +6,6 @@ import lev.filippov.models.Brand;
 import lev.filippov.models.Category;
 import lev.filippov.models.Product;
 import lev.filippov.models.dto.ProductDto;
-import lev.filippov.persistance.*;
 import lev.filippov.persistance.interfaces.JPARepository;
 import lev.filippov.persistance.interfaces.ProductJPARepository;
 import lev.filippov.service.rest.ProductRestService;
@@ -58,16 +57,16 @@ public class ProductServiceImpl implements RemoteProductService, ProductService,
         return productRepository.findAllbyCategory(catId).stream().map(ProductServiceImpl::productToDto).collect(Collectors.toList());
     }
 
-
+    @TransactionAttribute
     public void save(ProductDto dto) {
         Product product = new Product();
         product.setId(dto.getId());
         product.setName(dto.getName());
         product.setPrice(dto.getPrice());
         if (dto.getCategoryId() != null)
-            product.setCategory(((CategoryRepositoryImpl) (categoryRepository)).getReference(dto.getCategoryId()));
+            product.setCategory(categoryRepository.getReference(dto.getCategoryId()));
         if (dto.getBrandId() != null)
-            product.setBrand(((BrandRepositoryImpl) brandRepository).getReference(dto.getBrandId()));
+            product.setBrand(brandRepository.getReference(dto.getBrandId()));
         productRepository.save(product);
     }
 
@@ -76,8 +75,6 @@ public class ProductServiceImpl implements RemoteProductService, ProductService,
                 .orElseThrow(RuntimeException::new);
         return productToDto(product);
     }
-
-    ;
 
     public void delete(Long id) {
         productRepository.delete(id);
@@ -93,7 +90,6 @@ public class ProductServiceImpl implements RemoteProductService, ProductService,
                 .brandName(product.getBrand() != null ? product.getBrand().getName() : null)
                 .build();
     }
-
 
     @Override
     public List<ProductRemoteDto> getAllRemote() {

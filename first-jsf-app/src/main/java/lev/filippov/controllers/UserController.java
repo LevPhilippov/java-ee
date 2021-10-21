@@ -39,6 +39,15 @@ public class UserController implements Serializable {
     @Inject
     HttpSession session;
 
+    @Getter
+    @Setter
+    private List<UserDto> users;
+
+    public void preloadData(){
+        this.users = userService.getAll();
+        this.roles = roleJPARepository.getAll().stream().map(RoleDto::new).collect(Collectors.toSet());
+    }
+
     public List<RoleDto> getAllRoles() {
         return roleJPARepository.getAll()
                 .stream().map(RoleDto::new)

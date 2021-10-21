@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group">
                         <h:selectManyCheckbox styleClass="form-control" label="Roles" value="#{userController.user.roles}">
-                            <f:selectItems value="#{userController.getAllRoles()}" var="role" itemLabel="#{role.name}" itemValue="#{role}" itemLabelEscaped="true"/>
+                            <f:selectItems value="#{userController.roles}" var="role" itemLabel="#{role.name}" itemValue="#{role}" itemLabelEscaped="true"/>
                         </h:selectManyCheckbox>
                     </div>
                     <h:commandButton value="Submit" styleClass="btn btn-primary" action="#{userController.save()}"/>

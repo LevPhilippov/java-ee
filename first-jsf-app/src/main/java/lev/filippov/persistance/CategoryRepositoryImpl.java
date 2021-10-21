@@ -22,9 +22,6 @@ public class CategoryRepositoryImpl implements JPARepository<Category> {
     @Inject
     UserTransaction ut;
 
-//    private Map<Long, Category> storage;
-//    private Long counter;
-
     public CategoryRepositoryImpl() {
     }
 
@@ -44,20 +41,17 @@ public class CategoryRepositoryImpl implements JPARepository<Category> {
                 }
             }
         }
-//        this.storage = new HashMap();
-//        this.counter = 0L;
     }
-
-//    private Long getId() {
-//        return ++counter;
-//    }
 
     public List<Category> getAll(){
         return em.createQuery("SELECT c FROM Category c", Category.class).getResultList();
     }
-
+    @Transactional
     public void save(Category cat) {
-        em.persist(em.merge(cat));
+        if(cat.getId()!=null)
+            em.merge(cat);
+        else
+            em.persist(cat);
     }
 
     public Optional<Category> getProductById(Long id) {

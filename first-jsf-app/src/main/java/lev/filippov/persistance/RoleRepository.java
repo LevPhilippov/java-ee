@@ -21,8 +21,6 @@ public class RoleRepository implements JPARepository<Role> {
     @PersistenceContext(unitName = "ds")
     EntityManager em;
 
-
-
     @Override
     public List<Role> getAll() {
         return em.createQuery("from Role", Role.class).getResultList();

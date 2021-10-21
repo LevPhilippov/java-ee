@@ -8,7 +8,7 @@ import javax.naming.NamingException;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ClientApp {
+public class EJBRemoteApp {
 
     public static void main(String[] args) throws IOException, NamingException {
         Context context = createInitialContext();

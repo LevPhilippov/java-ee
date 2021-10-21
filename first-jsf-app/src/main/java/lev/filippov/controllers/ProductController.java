@@ -24,7 +24,9 @@ public class ProductController implements Serializable {
     @Inject
     BrandService brandService;
 
-//    @Inject
+    @Inject
+    CategoryController categoryController;
+
     @EJB
     ProductService productService;
 
@@ -50,6 +52,7 @@ public class ProductController implements Serializable {
 
     public void preloadData(ComponentSystemEvent componentSystemEvent){
         this.brandList = brandService.getAll();
+        this.categoryController.preloadData();
         if (request.getParameter("categoryId") != null)
             this.categoryId = Long.parseLong(request.getParameter("categoryId"));
         else {

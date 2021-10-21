@@ -19,9 +19,9 @@ public class Category implements Serializable {
     private Long id;
 
     @Column
-    private String name;
+    private String name;//
     //TODO: Можно попробовать обновить FOREIGN KEY в БД на каскадные операции - включить операцию INSERT.
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "category", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     private List<Product> products;
 
     @Override

@@ -29,11 +29,11 @@ public class Product implements Serializable {
     @Column
     private BigDecimal price;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "categoryId", referencedColumnName = "id")
     private Category category;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "brandId", referencedColumnName = "id")
     private Brand brand;
 
