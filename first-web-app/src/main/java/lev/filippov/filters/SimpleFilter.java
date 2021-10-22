@@ -16,10 +16,9 @@ public class SimpleFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-       //TODO: java.lang.IllegalStateException: UT010006: Cannot call getWriter(), getOutputStream() already called
-
-//        filterConfig.getServletContext().getRequestDispatcher("/header.html").include(servletRequest,servletResponse);
         servletResponse.setContentType("text/html; charset=utf-8");
+        servletRequest.setCharacterEncoding("UTF-8");
+        servletRequest.setCharacterEncoding("UTF-8");
         filterChain.doFilter(servletRequest,servletResponse);
     }
 }

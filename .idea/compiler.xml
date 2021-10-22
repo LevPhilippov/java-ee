@@ -2,11 +2,15 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="remote-jsf-api" />
+        <module name="remote-ejb-app" />
         <module name="first-web-app" />
+        <module name="first-jsf-app" />
       </profile>
     </annotationProcessing>
   </component>

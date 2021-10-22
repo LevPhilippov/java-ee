@@ -1,0 +1,23 @@
+GET http://127.0.0.1:8080/first-jsf-app/api/v1/category
+
+###
+
+GET http://127.0.0.1:8080/first-jsf-app/api/v1/category/6
+
+###
+
+POST http://127.0.0.1:8080/first-jsf-app/api/v1/category
+content-type:application/json
+
+{
+  "name": "Овощи",
+  "productDtoList": [
+    {
+      "id": 64
+    }
+  ]
+}
+
+###
+DELETE http://127.0.0.1:8080/first-jsf-app/api/v1/category/6
+

@@ -1,0 +1,79 @@
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pp="http://primefaces.org/ui" lang="en"
+>
+
+<h:head>
+    <ui:include src="WEB-INF/fragments/head.xhtml"/>
+</h:head>
+
+<h:body>
+    
+    <f:event listener="#{productController.preloadData}" type="preRenderView"/>
+
+    <ui:include src="WEB-INF/fragments/navigation.xhtml">
+        <ui:param name="pageName" value="Product List"/>
+    </ui:include>
+
+<div class="container">
+
+    <div class="row py-2">
+
+        <div class="col-md-3 col-xs-12">
+            <div class="list-group my-2">
+                <ui:repeat value="#{categoryController.categoryList}" var="category">
+                    <h:link styleClass="list-group-item list-group-item-action
+                    #{category.id == productController.categoryId ? 'active' : ''}"
+                            value="#{category.name}" outcome="/products"
+                    >
+                        <f:param name="categoryId" value="#{category.id}"/>
+                    </h:link>
+                </ui:repeat>
+                <h:link styleClass="list-group-item list-group-item-action
+                #{productController.categoryId == null ? 'active' : ''}"
+                        value="All products" outcome="/products">
+                </h:link>
+            </div>
+        </div>
+
+        <div class="col-md-9 col-xs-12" >
+            <h:form id="prodform">
+                <h:commandButton value="Add Product" styleClass="btn btn-primary my-2" action="#{productController.newProduct()}"/>
+                <h:dataTable value="#{productController.productList}"  var="product" styleClass="table table-bordered">
+                    <h:column>
+                        <f:facet name="header">Id</f:facet>
+                        #{product.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        #{product.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Price</f:facet>
+                        #{product.price}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Brand</f:facet>
+                        #{product.brandName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Category</f:facet>
+                        #{product.categoryName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Actions</f:facet>
+                        <h:commandButton id="editButton" value="Edit" action="#{productController.editProduct(product)}" styleClass="btn btn-success mr-2"/>
+                        <h:commandButton id="delButton" value="Delete" action="#{productController.deleteProduct(product)}" styleClass="btn btn-danger">
+                            <f:ajax event="click" render="prodform"/>
+                        </h:commandButton>
+                        <h:commandButton id="addToCartButton" value="Add to cart" action="#{cartController.addToCart(product)}" styleClass="btn btn-primary"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </div>
+    </div>
+</div>
+    <ui:include src="WEB-INF/fragments/script.xhtml"/>
+</h:body>
+</html>

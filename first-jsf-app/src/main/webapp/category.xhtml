@@ -1,0 +1,70 @@
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pp="http://primefaces.org/ui" lang="en"
+>
+
+<!--<%&#45;&#45;<%@ include file="head.jsp"%>&#45;&#45;%>-->
+
+<!--<jsp:include page="head.jsp">-->
+<!--    <jsp:param name="title" value="My Product List"/>-->
+<!--</jsp:include>-->
+
+<h:head>
+    <!--  Required meta tags  -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!--  Bootstrap CSS  -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
+    <title>Product list application</title>
+</h:head>
+
+<h:body>
+
+    <f:event listener="#{categoryController.preloadData}" type="preRenderView"/>
+
+    <ui:include src="WEB-INF/fragments/navigation.xhtml">
+        <ui:param name="pageName" value="Category"/>
+    </ui:include>
+
+<div class="container">
+
+    <div class="row py-2">
+        <div class="col-md-3 col-xs-12">
+                <ul class="list-group my-2">
+                    <ui:repeat value="#{categoryController.findAll()}" var="cat">
+                        <li class="list-group-item"><h:outputText value="#{cat.name}"/></li>
+                    </ui:repeat>
+                </ul>
+        </div>
+
+        <div class="col-md-9 col-xs-12" >
+            <h:form>
+                <h:commandButton value="Add Category" styleClass="btn btn-primary my-2" action="#{categoryController.newCategory()}"/>
+                <h:dataTable value="#{categoryController.categoryList}"  var="cat" styleClass="table table-bordered">
+                    <h:column>
+                        <f:facet name="header">Id</f:facet>
+                        #{cat.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        #{cat.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Actions</f:facet>
+                        <h:commandButton value="Edit" action="#{categoryController.editCat(cat)}" styleClass="btn btn-success mr-2"/>
+                        <h:commandButton id="delButton" value="Delete" action="#{categoryController.deleteCat(cat)}" styleClass="btn btn-danger">
+                        </h:commandButton>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </div>
+    </div>
+
+
+</div>
+
+    <ui:include src="WEB-INF/fragments/script.xhtml"/>
+    </h:body>
+</html>
